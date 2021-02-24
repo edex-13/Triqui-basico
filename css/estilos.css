@@ -34,7 +34,8 @@ header > div {
    height: 100%;
 }
 .container__triqui{
-   margin: 20px;
+   margin: 25px;
+   padding: 10px;
 }
 .container__triqui > div {
    display: flex;
@@ -136,13 +137,13 @@ header > div {
    display: flex;
    align-items: center;
    justify-content: center;
-   margin-top: 60px;
+   margin-top: 40px;
    height: 70px;
 }
 .footer > a {
    text-decoration: none;
    color: #363636;
-   margin-top: 80px;
+   margin-top: 20px;
    font-size: 20px;
 }
 .footer > a:hover {
@@ -150,12 +151,9 @@ header > div {
 }
 
 @media only screen and (max-width: 1000px) {
-   body{
-      background-color: rgb(121, 121, 206);
-   }
    .jugadores{
       bottom: 0;
-      padding: 0;
+      height: 70px;
    }
    .jugadores--uno {
       left: 20px;
@@ -164,7 +162,7 @@ header > div {
       right: 20px;
    }
    .footer > a { 
-      margin-bottom: 100px;
+      margin-bottom: 85px;
    }
 }
 @media only screen and (max-width: 425px) {
@@ -191,5 +189,5 @@ header > div {
    100% {
       transform: scale(1);
    }
-
+   }
 }
