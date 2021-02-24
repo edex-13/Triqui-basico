@@ -150,6 +150,9 @@ header > div {
 }
 
 @media only screen and (max-width: 1000px) {
+   body{
+      background-color: rgb(121, 121, 206);
+   }
    .jugadores{
       bottom: 0;
       padding: 0;
@@ -161,7 +164,7 @@ header > div {
       right: 20px;
    }
    .footer > a { 
-      margin-top: auto;
+      margin-bottom: 100px;
    }
 }
 @media only screen and (max-width: 425px) {
