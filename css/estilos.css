@@ -1,20 +1,88 @@
-*{
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
+* {
+   font-family: 'Poppins', sans-serif;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
 }
-header{
-    background-color: rgb(247, 247, 247);
-    display: flex;
-    align-items: center;
-    padding: 10px;
+body {
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
 }
-header > div{
-    margin-left: 30px;
+header {
+   background-color: rgb(247, 247, 247);
+   display: flex;
+   align-items: center;
+   padding: 20px;
+   height: 100px;
 }
-.Titulo{
-    font-size: 40px;
+header > div {
+   margin-left: 30px;
 }
-.Sub-Titulo{
-    font-size: 20px;
+.Titulo {
+   font-size: 30px;
+   color: #363636;
+}
+.Sub-Titulo {
+   font-size: 18px;
+   color: #363636;
+
+}
+.container{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   height: 100%;
+}
+
+.container__triqui > div{
+   display: flex;
+   flex-direction: row;
+}
+.triqui__item{
+   width: 120px;
+   height: 120px;
+   border: 5px solid  rgb(5, 127, 136);
+}
+.container__triqui>div:first-child > div{
+   border-top: none;
+}
+.container__triqui>div:last-child > div{
+   border-bottom: none;
+}
+.triqui__item:first-child {
+   border-left: none ;
+}
+.triqui__item:last-child {
+   border-right: none ;
+}
+.container__jugadores{
+   height: 100%;
+   width: 160px;
+   display: flex;
+   align-items: flex-end;
+   justify-content: center;
+   padding: 0px 30px 50px 30px;
+}
+.jugadores{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+}
+.footer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: auto;
+   height: 70px;
+}
+.footer > a {
+   text-decoration: none;
+   color: #363636;
+   margin: 60px;
+   font-size: 20px;
+}
+.footer > a:hover {
+   text-decoration: underline;
 }
