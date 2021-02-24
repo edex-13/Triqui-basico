@@ -3,3 +3,18 @@
     margin: 0;
     padding: 0;
 }
+header{
+    background-color: rgb(247, 247, 247);
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+header > div{
+    margin-left: 30px;
+}
+.Titulo{
+    font-size: 40px;
+}
+.Sub-Titulo{
+    font-size: 20px;
+}
