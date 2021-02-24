@@ -33,7 +33,9 @@ header > div {
    justify-content: center;
    height: 100%;
 }
-
+.container__triqui{
+   margin: 20px;
+}
 .container__triqui > div {
    display: flex;
    flex-direction: row;
@@ -163,7 +165,9 @@ header > div {
    }
 }
 @media only screen and (max-width: 425px) {
-
+   body{
+      height: 95vh;
+   }
    .jugadores{
       bottom: 70px;
       padding: 0;
