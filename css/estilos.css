@@ -5,7 +5,7 @@
    box-sizing: border-box;
 }
 body {
-   height: 90vh;
+   height: 100vh;
    display: flex;
    flex-direction: column;
 }
@@ -145,4 +145,44 @@ header > div {
 }
 .footer > a:hover {
    text-decoration: underline;
+}
+
+@media only screen and (max-width: 1000px) {
+   .jugadores{
+      bottom: 0;
+      padding: 0;
+   }
+   .jugadores--uno {
+      left: 20px;
+   }
+   .jugadores--dos {
+      right: 20px;
+   }
+   .footer > a { 
+      margin-top: auto;
+   }
+}
+@media only screen and (max-width: 425px) {
+
+   .jugadores{
+      bottom: 70px;
+      padding: 0;
+   }
+   .jugadores p{
+      font-size: 20px;
+   }
+   .jugadores > img{
+      display: none;
+   }
+   @keyframes pulse {
+   0% {
+      transform: scale(1);
+   }
+   50% {
+      transform: scale(1.2);
+   }
+   100% {
+      transform: scale(1);
+   }
+
 }
