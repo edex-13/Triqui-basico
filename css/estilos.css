@@ -47,6 +47,9 @@ header > div {
    border: 5px solid #25aac7;
    cursor: pointer;
 }
+.triqui__item > img{
+   width: 100px;
+}
 .triqui__item:hover {
    background-color: antiquewhite;
 }
