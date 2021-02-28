@@ -50,6 +50,9 @@ header > div {
 .triqui__item:hover {
    background-color: antiquewhite;
 }
+.triqui__item > img{
+   width: 90px;
+}
 .container__triqui > div:first-child > div {
    border-top: none;
 }
