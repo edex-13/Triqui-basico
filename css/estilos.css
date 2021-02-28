@@ -168,12 +168,12 @@ header > div {
       right: 20px;
    }
    .footer > a { 
-      margin-bottom: 85px;
+      margin-bottom: 35px;
    }
 }
 @media only screen and (max-width: 425px) {
    body{
-      height: 95vh;
+      height: 98vh;
    }
    .jugadores{
       bottom: 70px;
