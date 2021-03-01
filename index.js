@@ -77,19 +77,22 @@ function verificar(jugador) {
    return false;
 }
 
-function nuevoJuego() {
+function nuevoJuego(item1, item2, item3) {
    for (let element of ITEMS_TRIQUI) {
       element.value = false;
       element.classList.remove('uno');
       element.classList.remove('dos');
       element.innerHTML = '';
    }
-   INDICADOR_JUGADOR_UNO.classList.remove('oculto')
-   INDICADOR_JUGADOR_DOS.classList.add('oculto')
+   item1.classList.remove('mostrar');
+   item2.classList.remove('mostrar');
+   item3.classList.remove('mostrar');
+   INDICADOR_JUGADOR_UNO.classList.remove('oculto');
+   INDICADOR_JUGADOR_DOS.classList.add('oculto');
    turnoActual = 1;
    alguienGano = false;
 }
-function gano(quienGano) {
+function gano(quienGano, item1, item2, item3) {
    if (quienGano.id == 'uno') {
       marcadorJugadorUno += 1;
    }
@@ -97,16 +100,20 @@ function gano(quienGano) {
       marcadorJugadorDos += 1;
    }
    marcador.innerText = `${marcadorJugadorUno} - ${marcadorJugadorDos}`;
-
-   Swal.fire({
-      icon: 'success',
-      title: 'Muy Bien',
-      text: `${quienGano.nombre} gano esta partida de triqui`,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Nuevo Juego',
-   }).then(() => {
-      nuevoJuego();
-   });
+   item1.classList.add('mostrar');
+   item2.classList.add('mostrar');
+   item3.classList.add('mostrar');
+   setTimeout(() => {
+      Swal.fire({
+         icon: 'success',
+         title: 'Muy Bien',
+         text: `${quienGano.nombre} gano esta partida de triqui`,
+         confirmButtonColor: '#3085d6',
+         confirmButtonText: 'Nuevo Juego',
+      }).then(() => {
+         nuevoJuego(item1, item2, item3);
+      });
+   }, 1000);
 }
 function empate() {
    Swal.fire({

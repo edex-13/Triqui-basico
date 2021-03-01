@@ -27,7 +27,7 @@ header > div {
    font-size: 18px;
    color: #363636;
 }
-.marcador{
+.marcador {
    display: flex;
    justify-content: center;
    margin: 10px;
@@ -41,7 +41,7 @@ header > div {
    justify-content: center;
    height: 90%;
 }
-.container__triqui{
+.container__triqui {
    margin: 15px;
    padding: 10px;
 }
@@ -61,8 +61,11 @@ header > div {
 .triqui__item:hover {
    background-color: antiquewhite;
 }
-.triqui__item > img{
+.triqui__item > img {
    width: 90px;
+}
+.triqui__item.mostrar {
+   background:rgba(37, 169, 199, 0.192);
 }
 .container__triqui > div:first-child > div {
    border-top: none;
@@ -164,7 +167,7 @@ header > div {
 }
 
 @media only screen and (max-width: 1000px) {
-   .jugadores{
+   .jugadores {
       bottom: 0;
       height: 70px;
    }
@@ -174,33 +177,33 @@ header > div {
    .jugadores--dos {
       right: 20px;
    }
-   .footer > a { 
+   .footer > a {
       margin-bottom: 35px;
    }
 }
 @media only screen and (max-width: 425px) {
-   body{
+   body {
       height: 98vh;
    }
-   .jugadores{
+   .jugadores {
       bottom: 70px;
       padding: 0;
    }
-   .jugadores p{
+   .jugadores p {
       font-size: 20px;
    }
-   .jugadores > img{
+   .jugadores > img {
       display: none;
    }
    @keyframes pulse {
-   0% {
-      transform: scale(1);
-   }
-   50% {
-      transform: scale(1.2);
-   }
-   100% {
-      transform: scale(1);
-   }
+      0% {
+         transform: scale(1);
+      }
+      50% {
+         transform: scale(1.2);
+      }
+      100% {
+         transform: scale(1);
+      }
    }
 }
