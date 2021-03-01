@@ -1,7 +1,10 @@
 const TEXT_DEL_JUGADOR_UNO = document.getElementById('nombreJugador1');
 const TEXT_DEL_JUGADOR_DOS = document.getElementById('nombreJugador2');
+const TEXT_MARCADOR = document.getElementById('marcador');
+
 const INDICADOR_JUGADOR_UNO = document.getElementById('indicadorJugadorUno');
 const INDICADOR_JUGADOR_DOS = document.getElementById('indicadorJugadorDos');
+
 const UNO = document.getElementById('1');
 const DOS = document.getElementById('2');
 const TRES = document.getElementById('3');
@@ -17,6 +20,9 @@ const NUEVE = document.getElementById('9');
 const ITEMS_TRIQUI = document.querySelectorAll('.triqui__item');
 const TURNO_MAXIMO = 9;
 let turnoActual = 1;
+let marcadorJugadorUno = 0;
+let marcadorJugadorDos = 0;
+let alguienGano = false;
 
 class jugador {
    constructor(nombre, turno, id, rutaImg) {
@@ -38,46 +44,80 @@ function ponerNombres(nombreJugadorUno, nombreJugadorDos) {
 
 function verificar(jugador) {
    if (UNO.classList.contains(jugador.id) && DOS.classList.contains(jugador.id) && TRES.classList.contains(jugador.id)) {
-      gano(jugador);
+      gano(jugador, UNO, DOS, TRES);
       return true;
    } else if (CUATRO.classList.contains(jugador.id) && CINCO.classList.contains(jugador.id) && SEIS.classList.contains(jugador.id)) {
-      gano(jugador);
+      gano(jugador, CUATRO, CINCO, SEIS);
       return true;
    } else if (SIETE.classList.contains(jugador.id) && OCHO.classList.contains(jugador.id) && NUEVE.classList.contains(jugador.id)) {
-      gano(jugador);
+      gano(jugador, SIETE, OCHO, NUEVE);
       return true;
    }
 
    if (UNO.classList.contains(jugador.id) && CUATRO.classList.contains(jugador.id) && SIETE.classList.contains(jugador.id)) {
-      gano(jugador);
+      gano(jugador, UNO, CUATRO, SIETE);
       return true;
    } else if (DOS.classList.contains(jugador.id) && CINCO.classList.contains(jugador.id) && OCHO.classList.contains(jugador.id)) {
-      gano(jugador);
+      gano(jugador, DOS, CINCO, OCHO);
       return true;
    } else if (TRES.classList.contains(jugador.id) && SEIS.classList.contains(jugador.id) && NUEVE.classList.contains(jugador.id)) {
-      gano(jugador);
+      gano(jugador, TRES, SEIS, NUEVE);
       return true;
    }
    if (UNO.classList.contains(jugador.id) && CINCO.classList.contains(jugador.id) && NUEVE.classList.contains(jugador.id)) {
-      gano(jugador);
+      gano(jugador, UNO, CINCO, NUEVE);
       return true;
    } else if (TRES.classList.contains(jugador.id) && CINCO.classList.contains(jugador.id) && SIETE.classList.contains(jugador.id)) {
-      gano(jugador);
+      gano(jugador, TRES, CINCO, SIETE);
       return true;
    }
-   if(turnoActual==TURNO_MAXIMO+1){
-      console.log(empate)
+   if (turnoActual == TURNO_MAXIMO + 1) {
+      empate();
    }
    return false;
 }
 
-let alguienGano = false;
-
-function gano(quienGano) {
-   alert("Gano " + quienGano.nombre)
+function nuevoJuego() {
+   for (let element of ITEMS_TRIQUI) {
+      element.value = false;
+      element.classList.remove('uno');
+      element.classList.remove('dos');
+      element.innerHTML = '';
+   }
+   INDICADOR_JUGADOR_UNO.classList.remove('oculto')
+   INDICADOR_JUGADOR_DOS.classList.add('oculto')
+   turnoActual = 1;
+   alguienGano = false;
 }
-function empate(){
-   alert('empate')
+function gano(quienGano) {
+   if (quienGano.id == 'uno') {
+      marcadorJugadorUno += 1;
+   }
+   if (quienGano.id == 'dos') {
+      marcadorJugadorDos += 1;
+   }
+   marcador.innerText = `${marcadorJugadorUno} - ${marcadorJugadorDos}`;
+
+   Swal.fire({
+      icon: 'success',
+      title: 'Muy Bien',
+      text: `${quienGano.nombre} gano esta partida de triqui`,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Nuevo Juego',
+   }).then(() => {
+      nuevoJuego();
+   });
+}
+function empate() {
+   Swal.fire({
+      icon: 'info',
+      title: 'Opss!',
+      text: `Esta partida ha quedado en EMPATE`,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Nuevo Juego',
+   }).then(() => {
+      nuevoJuego();
+   });
 }
 function esTurnoDeJugadorUno(jugadorUno, item) {
    if (item.value != true) {
@@ -88,7 +128,6 @@ function esTurnoDeJugadorUno(jugadorUno, item) {
          alguienGano = verificar(jugadorUno);
          INDICADOR_JUGADOR_DOS.classList.remove('oculto');
          INDICADOR_JUGADOR_UNO.classList.add('oculto');
-
       }
    }
 }

@@ -27,14 +27,22 @@ header > div {
    font-size: 18px;
    color: #363636;
 }
+.marcador{
+   display: flex;
+   justify-content: center;
+   margin: 10px;
+}
+.marcador > h3 {
+   color: #363636;
+}
 .container {
    display: flex;
    align-items: center;
    justify-content: center;
-   height: 100%;
+   height: 90%;
 }
 .container__triqui{
-   margin: 25px;
+   margin: 15px;
    padding: 10px;
 }
 .container__triqui > div {
@@ -143,7 +151,6 @@ header > div {
    display: flex;
    align-items: center;
    justify-content: center;
-   margin-top: 40px;
    height: 70px;
 }
 .footer > a {
