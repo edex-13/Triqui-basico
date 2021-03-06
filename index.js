@@ -1,120 +1,185 @@
-const nombreJugadorUno = document.getElementById('nombreJugador1');
-const nombreJugadorDos = document.getElementById('nombreJugador2');
-const item0_0 = document.getElementById('1');
-const item0_1 = document.getElementById('2');
-const item0_2 = document.getElementById('3');
-const item1_0 = document.getElementById('4');
-const item1_1 = document.getElementById('5');
-const item1_2 = document.getElementById('6');
-const item2_0 = document.getElementById('7');
-const item2_1 = document.getElementById('8');
-const item2_2 = document.getElementById('9');
-let turno = 1;
+const TEXT_DEL_JUGADOR_UNO = document.getElementById('nombreJugador1');
+const TEXT_DEL_JUGADOR_DOS = document.getElementById('nombreJugador2');
+const TEXT_MARCADOR = document.getElementById('marcador');
+
+const INDICADOR_JUGADOR_UNO = document.getElementById('indicadorJugadorUno');
+const INDICADOR_JUGADOR_DOS = document.getElementById('indicadorJugadorDos');
+
+const UNO = document.getElementById('1');
+const DOS = document.getElementById('2');
+const TRES = document.getElementById('3');
+
+const CUATRO = document.getElementById('4');
+const CINCO = document.getElementById('5');
+const SEIS = document.getElementById('6');
+
+const SIETE = document.getElementById('7');
+const OCHO = document.getElementById('8');
+const NUEVE = document.getElementById('9');
+
+const ITEMS_TRIQUI = document.querySelectorAll('.triqui__item');
+const TURNO_MAXIMO = 9;
+let turnoActual = 1;
+let marcadorJugadorUno = 0;
+let marcadorJugadorDos = 0;
+let alguienGano = false;
+
 class jugador {
-   constructor(name, id) {
-      this.name = name;
+   constructor(nombre, turno, id, rutaImg) {
+      this.nombre = nombre;
+      this.turno = turno;
       this.id = id;
-      this.asignarImagen();
-   }
-   asignarImagen() {
-      if (this.id == 0) {
-         this.img = '<img src="img/x.svg">';
-      } else {
-         this.img = '<img src="img/Circulo.svg">';
-      }
+      this.rutaImg = rutaImg;
    }
 }
-guardarNombre();
-function guardarNombre() {
-   Swal.fire({
-      title: 'Registrar Jugadores',
-      html:
-         '<input id="name1" class="swal2-input" placeholder="Nombre Jugador 1">' +
-         '<input id="name2" class="swal2-input" placeholder="Nombre Jugador 2">',
-      focusConfirm: false,
-      preConfirm: () => {
-         return [document.getElementById('name1').value, document.getElementById('name2').value];
-      },
-   }).then((e) => {
-      console.log(e.value);
-      if (!e.value || e.value[0] == '' || e.value[1] == '') {
-         errorEnElNombre();
-      } else {
-         iniciarJuego(e.value);
-      }
-   });
+function crearJugadores(nombre) {
+   const jugador1 = new jugador(nombre[0], 1, 'uno', 'img/x.svg');
+   const jugador2 = new jugador(nombre[1], 2, 'dos', 'img/Circulo.svg');
+   return [jugador1, jugador2];
+}
+function ponerNombres(nombreJugadorUno, nombreJugadorDos) {
+   TEXT_DEL_JUGADOR_UNO.innerText = nombreJugadorUno;
+   TEXT_DEL_JUGADOR_DOS.innerText = nombreJugadorDos;
 }
 
-function errorEnElNombre() {
-   // console.log('error');
+function verificar(jugador) {
+   if (UNO.classList.contains(jugador.id) && DOS.classList.contains(jugador.id) && TRES.classList.contains(jugador.id)) {
+      gano(jugador, UNO, DOS, TRES);
+      return true;
+   } else if (CUATRO.classList.contains(jugador.id) && CINCO.classList.contains(jugador.id) && SEIS.classList.contains(jugador.id)) {
+      gano(jugador, CUATRO, CINCO, SEIS);
+      return true;
+   } else if (SIETE.classList.contains(jugador.id) && OCHO.classList.contains(jugador.id) && NUEVE.classList.contains(jugador.id)) {
+      gano(jugador, SIETE, OCHO, NUEVE);
+      return true;
+   }
+
+   if (UNO.classList.contains(jugador.id) && CUATRO.classList.contains(jugador.id) && SIETE.classList.contains(jugador.id)) {
+      gano(jugador, UNO, CUATRO, SIETE);
+      return true;
+   } else if (DOS.classList.contains(jugador.id) && CINCO.classList.contains(jugador.id) && OCHO.classList.contains(jugador.id)) {
+      gano(jugador, DOS, CINCO, OCHO);
+      return true;
+   } else if (TRES.classList.contains(jugador.id) && SEIS.classList.contains(jugador.id) && NUEVE.classList.contains(jugador.id)) {
+      gano(jugador, TRES, SEIS, NUEVE);
+      return true;
+   }
+   if (UNO.classList.contains(jugador.id) && CINCO.classList.contains(jugador.id) && NUEVE.classList.contains(jugador.id)) {
+      gano(jugador, UNO, CINCO, NUEVE);
+      return true;
+   } else if (TRES.classList.contains(jugador.id) && CINCO.classList.contains(jugador.id) && SIETE.classList.contains(jugador.id)) {
+      gano(jugador, TRES, CINCO, SIETE);
+      return true;
+   }
+   if (turnoActual == TURNO_MAXIMO + 1) {
+      empate();
+   }
+   return false;
+}
+
+function nuevoJuego(item1, item2, item3) {
+   for (let element of ITEMS_TRIQUI) {
+      element.value = false;
+      element.classList.remove('uno');
+      element.classList.remove('dos');
+      element.innerHTML = '';
+   }
+   if (item1 && item2 && item3) {
+      item1.classList.remove('mostrar');
+      item2.classList.remove('mostrar');
+      item3.classList.remove('mostrar');
+   }
+   INDICADOR_JUGADOR_UNO.classList.remove('oculto');
+   INDICADOR_JUGADOR_DOS.classList.add('oculto');
+   turnoActual = 1;
+   alguienGano = false;
+}
+function gano(quienGano, item1, item2, item3) {
+   if (quienGano.id == 'uno') {
+      marcadorJugadorUno += 1;
+   }
+   if (quienGano.id == 'dos') {
+      marcadorJugadorDos += 1;
+   }
+   marcador.innerText = `${marcadorJugadorUno} - ${marcadorJugadorDos}`;
+   item1.classList.add('mostrar');
+   item2.classList.add('mostrar');
+   item3.classList.add('mostrar');
+   setTimeout(() => {
+      Swal.fire({
+         icon: 'success',
+         title: 'Muy Bien',
+         text: `${quienGano.nombre} gano esta partida de triqui`,
+         confirmButtonColor: '#3085d6',
+         confirmButtonText: 'Nuevo Juego',
+      }).then(() => {
+         nuevoJuego(item1, item2, item3);
+      });
+   }, 1000);
+}
+function empate() {
    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Ingresa los nombres de los dos jugadores',
+      icon: 'info',
+      title: 'Opss!',
+      text: `Esta partida ha quedado en EMPATE`,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Nuevo Juego',
    }).then(() => {
-      setTimeout(guardarNombre(), 1000);
+      nuevoJuego();
    });
 }
-
-function tablero(jugador1, jugador2) {
-   item0_0.addEventListener('click', () => {
-      ponerImg(item0_0);
-   });
-   item0_1.addEventListener('click', () => {
-      ponerImg(item0_1);
-   });
-   item0_2.addEventListener('click', () => {
-      ponerImg(item0_2);
-   });
-
-   item1_0.addEventListener('click', () => {
-      ponerImg(item1_0);
-   });
-   item1_1.addEventListener('click', () => {
-      ponerImg(item1_1);
-   });
-   item1_2.addEventListener('click', () => {
-      ponerImg(item1_2);
-   });
-   item2_0.addEventListener('click', () => {
-      ponerImg(item2_0);
-   });
-   item2_1.addEventListener('click', () => {
-      ponerImg(item2_1);
-   });
-   item2_2.addEventListener('click', () => {
-      ponerImg(item2_2);
-   });
-   function ponerImg(id) {
-      if (turno <= 9) {
-         if (!id.value) {
-            if (turno % 2 == 0) {
-               id.innerHTML = jugador1.img;
-               id.value = 1;
-               verificar();
-            } else {
-               id.innerHTML = jugador2.img;
-               id.value = 2;
-               verificar();
-            }
-            turno++;
-         }
-      }
-      if (turno == 9) {
+function esTurnoDeJugadorUno(jugadorUno, item) {
+   if (item.value != true) {
+      if (!alguienGano) {
+         item.innerHTML = `<img src="${jugadorUno.rutaImg}" alt="logo" />`;
+         turnoActual++;
+         item.classList.add(jugadorUno.id);
+         alguienGano = verificar(jugadorUno);
+         INDICADOR_JUGADOR_DOS.classList.remove('oculto');
+         INDICADOR_JUGADOR_UNO.classList.add('oculto');
       }
    }
 }
-function verificar(secuenciaUna, secuenciaDos) {
-   if ((item0_0.value == item0_1.value && item0_0.value == item0_2.value) && (item0_0.value != undefined  && item0_1.value != undefined && item0_2.value != undefined) ) {
-      console.log('gano ' + item0_0.value);
-   } else if (item1_0.value == item1_1.value && item1_0.value == item1_2.value && item1_0 != undefined) {
-      console.log('gano ' + item1_0.value);
+
+function esTurnoDeJugadorDos(jugadorDos, item) {
+   if (item.value != true) {
+      if (!alguienGano) {
+         item.innerHTML = `<img src="${jugadorDos.rutaImg}" alt="logo" />`;
+         turnoActual++;
+         item.classList.add(jugadorDos.id);
+         alguienGano = verificar(jugadorDos);
+         INDICADOR_JUGADOR_UNO.classList.remove('oculto');
+         INDICADOR_JUGADOR_DOS.classList.add('oculto');
+      }
+   }
+}
+function turno(turnoActual, jugadorUno, jugadorDos, item) {
+   let turnoActualEsPar;
+   if (turnoActual % 2 != 0) {
+      turnoActualEsPar = false;
+   } else {
+      turnoActualEsPar = true;
+   }
+   if (!turnoActualEsPar) {
+      esTurnoDeJugadorUno(jugadorUno, item);
+   } else if (turnoActualEsPar) {
+      esTurnoDeJugadorDos(jugadorDos, item);
+   }
+}
+function tablero(jugadorUno, jugadorDos) {
+   for (let element of ITEMS_TRIQUI) {
+      element.addEventListener('click', () => {
+         if (turnoActual <= TURNO_MAXIMO) {
+            turno(turnoActual, jugadorUno, jugadorDos, element);
+            element.value = true;
+         }
+      });
    }
 }
 function iniciarJuego(nombre) {
-   const jugador1 = new jugador(nombre[0], 0);
-   const jugador2 = new jugador(nombre[1], 1);
-   nombreJugadorUno.innerText = jugador1.name;
-   nombreJugadorDos.innerText = jugador2.name;
-   tablero(jugador1, jugador2);
+   const jugadores = crearJugadores(nombre);
+   const jugadorUno = jugadores[0];
+   const jugadorDos = jugadores[1];
+   ponerNombres(jugadorUno.nombre, jugadorDos.nombre);
+   tablero(jugadorUno, jugadorDos);
 }

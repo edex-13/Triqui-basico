@@ -3,6 +3,7 @@
    <head>
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="Description" content="Put your description here." />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet" />
@@ -23,37 +24,43 @@
             <p class="Sub-Titulo"></p>
          </div>
       </header>
-      <main class="container">
-         <div class="container__jugadores">
-            <div class="jugadores jugadores--uno" id="jugador1">
-               <div class="jugadores__indicadores jugadores__indicadores--uno oculto pulse animated"></div>
-               <img src="img/icons/icono_Hombre1.svg" alt="Usuario masculino 1" />
-               <p id="nombreJugador1"></p>
-            </div>
-         </div>
-         <div class="container__triqui">
-            <div>
-               <div id="1"class="triqui__item triqui__item--1"></div>
-               <div id="2"class="triqui__item triqui__item--2"></div>
-               <div id="3"class="triqui__item triqui__item--3"></div>
-            </div>
-            <div>
-               <div id="4" class="triqui__item triqui__item--4"></div>
-               <div id="5" class="triqui__item triqui__item--5"></div>
-               <div id="6" class="triqui__item triqui__item--6"></div>
-            </div>
-            <div>
-               <div id="7" class="triqui__item triqui__item--7"></div>
-               <div id="8" class="triqui__item triqui__item--8"></div>
-               <div id="9" class="triqui__item triqui__item--9"></div>
-            </div>
-         </div>
 
-         <div class="container__jugadores">
-            <div class="jugadores jugadores--dos" id="jugador2">
-               <div class="jugadores__indicadores jugadores__indicadores--dos oculto pulse animated"></div>
-               <img src="img/icons/icono_Mujer2.svg" alt="Usuario femenino 2" />
-               <p id="nombreJugador2"></p>
+      <main >
+         <div class="marcador">
+            <h3 id="marcador">0-0</h3>
+         </div>
+         <div class="container">
+            <div class="container__jugadores">
+               <div class="jugadores jugadores--uno" id="jugador1">
+                  <div class="jugadores__indicadores jugadores__indicadores--uno pulse animated" id="indicadorJugadorUno"></div>
+                  <img src="img/icons/icono_Hombre1.svg" alt="Usuario masculino 1" />
+                  <p id="nombreJugador1"></p>
+               </div>
+            </div>
+            <div class="container__triqui">
+               <div>
+                  <div class="triqui__item triqui__item--1" id="1"></div>
+                  <div class="triqui__item triqui__item--2" id="2"></div>
+                  <div class="triqui__item triqui__item--3" id="3"></div>
+               </div>
+               <div>
+                  <div class="triqui__item triqui__item--4" id="4"></div>
+                  <div class="triqui__item triqui__item--5" id="5"></div>
+                  <div class="triqui__item triqui__item--6" id="6"></div>
+               </div>
+               <div>
+                  <div class="triqui__item triqui__item--7" id="7"></div>
+                  <div class="triqui__item triqui__item--8" id="8"></div>
+                  <div class="triqui__item triqui__item--9" id="9"></div>
+               </div>
+            </div>
+
+            <div class="container__jugadores">
+               <div class="jugadores jugadores--dos" id="jugador2">
+                  <div class="jugadores__indicadores jugadores__indicadores--dos oculto pulse animated" id="indicadorJugadorDos"></div>
+                  <img src="img/icons/icono_Mujer2.svg" alt="Usuario femenino 2" />
+                  <p id="nombreJugador2"></p>
+               </div>
             </div>
          </div>
       </main>
@@ -61,6 +68,7 @@
          <a target="blank" href="https://github.com/edex-13">Mi Github</a>
       </footer>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.all.min.js"></script>
+      <script src="obtenerNombre.js"></script>
       <script src="index.js"></script>
    </body>
 </html>
