@@ -13,11 +13,9 @@ header {
    background-color: rgb(247, 247, 247);
    display: flex;
    align-items: center;
+   justify-content: center;
    padding: 20px;
    height: 100px;
-}
-header > div {
-   margin-left: 30px;
 }
 .Titulo {
    font-size: 30px;
